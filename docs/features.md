@@ -1,0 +1,13 @@
+# Features
+- Login and user storage
+- Add their kitchen inventory
+- Automatically(?) pull recipes from an internet database
+- Save specific recipes
+- Create your own recipes
+- Pull recipes based on kitchen inventory
+- Fetch random recipe
+- Generate shopping list from recipe
+- View list of recipes
+	- Various filters?
+- Unsave/delete recipes
+- Star rating of recipes
