@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.2.32616.157
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheckTheFridge", "CheckTheFridge.csproj", "{DA1B93CF-4084-43F4-9258-B529FF524123}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CheckTheFridge", "CheckTheFridge.csproj", "{855220DD-D545-4C43-97F9-90041B7B64FB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -11,15 +11,15 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{DA1B93CF-4084-43F4-9258-B529FF524123}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DA1B93CF-4084-43F4-9258-B529FF524123}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DA1B93CF-4084-43F4-9258-B529FF524123}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DA1B93CF-4084-43F4-9258-B529FF524123}.Release|Any CPU.Build.0 = Release|Any CPU
+		{855220DD-D545-4C43-97F9-90041B7B64FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{855220DD-D545-4C43-97F9-90041B7B64FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{855220DD-D545-4C43-97F9-90041B7B64FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{855220DD-D545-4C43-97F9-90041B7B64FB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {AE8ED3FA-4D47-49D1-8455-3BD1B6EE3F2A}
+		SolutionGuid = {BFF4BCC0-1275-4BB9-BC3A-C99FF51101AC}
 	EndGlobalSection
 EndGlobal
