@@ -1,0 +1,16 @@
+﻿.login-form {
+
+    margin: 100px 100px 100px ;
+    display: flex;
+    justify-content: center;
+    flex-flow:column;
+    
+}
+
+.input, .submit, h2 {
+    padding-top: 12px;
+    margin: auto;
+   
+}
+
+

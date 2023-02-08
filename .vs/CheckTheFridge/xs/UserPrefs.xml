@@ -1,0 +1,40 @@
+﻿<Properties StartupConfiguration="{64B4EC76-9F30-49EA-AA8B-50E6908D40CB}|Default">
+  <MonoDevelop.Ide.DebuggingService.PinnedWatches />
+  <MonoDevelop.Ide.Workbench ActiveDocument="CheckTheFridge/ClientApp/src/components/UserAuthentication/LoginPage.js">
+    <Files>
+      <File FileName="CheckTheFridge/ClientApp/src/components/LoginPage.js" Line="16" Column="31" />
+      <File FileName="CheckTheFridge/ClientApp/src/components/LoginPage.js" Line="11" Column="19" />
+      <File FileName="CheckTheFridge/ClientApp/src/components/UserAuthentication/LoginPage.css" Line="1" Column="1" />
+    </Files>
+    <Pads>
+      <Pad Id="ProjectPad">
+        <State name="__root__">
+          <Node name="CheckTheFridge" expanded="True">
+            <Node name="CheckTheFridge" expanded="True">
+              <Node name="Dependencies" expanded="True">
+                <Node name="PackageDependencies" expanded="True" />
+              </Node>
+              <Node name="ClientApp" expanded="True">
+                <Node name="src" expanded="True">
+                  <Node name="components" expanded="True">
+                    <Node name="UserAuthentication" expanded="True">
+                      <Node name="LoginPage.css" selected="True" />
+                    </Node>
+                  </Node>
+                  <Node name="App.js" expanded="True" />
+                </Node>
+              </Node>
+              <Node name="Models" expanded="True" />
+            </Node>
+          </Node>
+        </State>
+      </Pad>
+    </Pads>
+  </MonoDevelop.Ide.Workbench>
+  <MultiItemStartupConfigurations />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.ItemProperties.CheckTheFridge PreferredExecutionTarget="/Applications/Google Chrome.app" />
+  <MonoDevelop.Ide.DebuggingService.Breakpoints>
+    <BreakpointStore />
+  </MonoDevelop.Ide.DebuggingService.Breakpoints>
+</Properties>
