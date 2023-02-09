@@ -1,25 +1,23 @@
-﻿<Properties StartupConfiguration="{64B4EC76-9F30-49EA-AA8B-50E6908D40CB}|Default">
+﻿<Properties GitUserInfo="UsingGIT" StartupConfiguration="{64B4EC76-9F30-49EA-AA8B-50E6908D40CB}|Default">
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workbench ActiveDocument="CheckTheFridge/ClientApp/src/components/UserAuthentication/LoginPage.js">
     <Files>
-      <File FileName="CheckTheFridge/ClientApp/src/components/LoginPage.js" Line="16" Column="31" />
-      <File FileName="CheckTheFridge/ClientApp/src/components/LoginPage.js" Line="11" Column="19" />
-      <File FileName="CheckTheFridge/ClientApp/src/components/UserAuthentication/LoginPage.css" Line="1" Column="1" />
+      <File FileName="CheckTheFridge/ClientApp/src/components/UserAuthentication/LoginPage.js" Line="22" Column="29" />
+      <File FileName="CheckTheFridge/ClientApp/src/components/UserAuthentication/LoginPage.css" />
+      <File FileName="CheckTheFridge/ClientApp/src/index.js" />
+      <File FileName="CheckTheFridge/ClientApp/src/AppRoutes.js" />
+      <File FileName="CheckTheFridge/ClientApp/src/App.js" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="CheckTheFridge" expanded="True">
             <Node name="CheckTheFridge" expanded="True">
-              <Node name="Dependencies" expanded="True">
-                <Node name="PackageDependencies" expanded="True" />
-              </Node>
+              <Node name="Dependencies" expanded="True" />
               <Node name="ClientApp" expanded="True">
                 <Node name="src" expanded="True">
                   <Node name="components" expanded="True">
-                    <Node name="UserAuthentication" expanded="True">
-                      <Node name="LoginPage.css" selected="True" />
-                    </Node>
+                    <Node name="UserAuthentication" expanded="True" />
                   </Node>
                   <Node name="App.js" expanded="True" />
                 </Node>
@@ -28,6 +26,9 @@
             </Node>
           </Node>
         </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>

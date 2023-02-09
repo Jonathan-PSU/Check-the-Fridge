@@ -1,7 +1,6 @@
-﻿import React,
-{ useState } from 'react';
-import App from '../../App';
-import LoginPage from './LoginPage';
+﻿import React, { useState } from "react";
+import App from "../../App";
+import LoginPage from "./LoginPage";
 
 /*
  * This file is the intermediate step for having a user login before viewing application
@@ -9,13 +8,10 @@ import LoginPage from './LoginPage';
  * allow user to view webpage contents */
 
 export default function AuthorizeUser() {
+  const [token, setToken] = useState();
 
-    const [token, setToken] = useState();
-
-    if (!token) {
-        return <LoginPage userToken={setToken} />    
-    }
-    return (
-       <App/>
-    )
+  if (!token) {
+    return <LoginPage userToken={setToken} />;
+  }
+  return <App />;
 }
