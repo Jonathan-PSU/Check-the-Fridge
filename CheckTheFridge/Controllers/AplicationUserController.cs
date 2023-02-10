@@ -7,22 +7,37 @@ namespace CheckTheFridge.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-   
+
     public class AplicationUserController : ControllerBase
     {
-        
+
         [HttpGet]
-        public async Task<ActionResult<ApplicationUser>> Get(string id)
+        public async Task<ActionResult<ApplicationUser>> GetUser(string id)
         {
-            DatabaseInterface db= new DatabaseInterface();
+            DatabaseInterface db = new DatabaseInterface();
             var user = new ApplicationUser();
-            //user.username = db.GetName(id);
-            user.UserName = "lil";
-            user.firstName = "Test";
-            user.lastName= "Test";
-            user.password= "Test";
+            user.Username = db.GetById(id, "username");
+            user.FirstName = db.GetById(id, "firstname");
+            user.LastName = db.GetById(id, "lastname");
+            user.Password = db.GetById(id, "password");
             return Ok(user);
         }
-        
+
+        [HttpGet("PasswordValidation")]
+        public async Task<ActionResult<int>> PasswordValidation(string username, string password)
+        {
+            DatabaseInterface db = new DatabaseInterface();
+
+            return db.PasswordValidation(username, password);
+        }
+
+        [HttpPost("CreateUser")]
+        public async Task<ActionResult<int>> CreateUser(string firstname, string lastname, string username, string password)
+        {
+            DatabaseInterface db = new DatabaseInterface();
+
+            return db.CreateUser(firstname, lastname, username, password);
+        }
+    
     }
 }
