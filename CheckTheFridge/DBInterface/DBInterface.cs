@@ -14,40 +14,40 @@ namespace CheckTheFridge.DBInterface
 
         public string GetById(string id, string field)
         {
+            int fieldNum = -1;
+            string toReturn = "error";
             field.ToLower();
-            int field_num = -1;
+            
             switch (field)
             {
                 case "firstname":
-                    // code block
-                    field_num = 1;
+                    fieldNum = 1;
                     break;
                 case "lastname":
-                    // code block
-                    field_num = 2;
+                    fieldNum = 2;
                     break;
                 case "username":
-                    // code block
-                    field_num = 3;
+                    fieldNum = 3;
                     break;
                 case "password":
-                    // code block
-                    field_num = 4;
+                    fieldNum = 4;
                     break;
                 default:
-                    // code block
                     break;
             }
-            if (field_num >= 1)
+            if (fieldNum >= 1)
             {
                 foreach (string line in lines)
                 {
                     var fields = line.Split(',');
                     if (fields[0] == id)
-                        return fields[field_num];
+                    {
+                        toReturn = fields[fieldNum];
+                        break;
+                    }
                 }
             }
-            return "wrong";
+            return toReturn;
         }
 
         public int PasswordValidation(string username, string password)

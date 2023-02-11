@@ -12,7 +12,7 @@ namespace CheckTheFridge.Controllers
     {
 
         [HttpGet]
-        public async Task<ActionResult<ApplicationUser>> GetUser(string id)
+        public ApplicationUser GetUser(string id)
         {
             DatabaseInterface db = new DatabaseInterface();
             var user = new ApplicationUser();
@@ -20,11 +20,11 @@ namespace CheckTheFridge.Controllers
             user.FirstName = db.GetById(id, "firstname");
             user.LastName = db.GetById(id, "lastname");
             user.Password = db.GetById(id, "password");
-            return Ok(user);
+            return user;
         }
 
         [HttpGet("PasswordValidation")]
-        public async Task<ActionResult<int>> PasswordValidation(string username, string password)
+        public int PasswordValidation(string username, string password)
         {
             DatabaseInterface db = new DatabaseInterface();
 
@@ -32,7 +32,7 @@ namespace CheckTheFridge.Controllers
         }
 
         [HttpPost("CreateUser")]
-        public async Task<ActionResult<int>> CreateUser(string firstname, string lastname, string username, string password)
+        public int CreateUser(string firstname, string lastname, string username, string password)
         {
             DatabaseInterface db = new DatabaseInterface();
 
