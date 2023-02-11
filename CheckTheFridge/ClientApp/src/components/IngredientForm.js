@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { useState, onSubmit, Component } from 'react';
 import { Form, Button } from 'react-bootstrap';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -8,18 +8,18 @@ const AddIngredient = ({ onSave }) => {
     return (
         <form className="add-form" onSubmit={onSubmit}>
             <div className="form-control">
-                <label>Task</label>
-                <input type="text" placeholder="add task" value={text} onChange={(e) => setText(e.target.value)} />
+                <label>Ingredient</label>
+                <input type="text" placeholder="add ingredient" value={text} onChange={(e) => setText(e.target.value)} />
             </div>
             <div className="form-control">
                 <label>Description</label>
-                <input type="text" placeholder="add day & time" value={day} onChange{(e) => setDescription(e.target.value)} />
+                <input type="text" placeholder="add description" value={description} onChange={(e) => setDescription(e.target.value)} />
             </div>
             <input type="submit" className="btn btn-block" value="Save Task" />
         </form>
     )
 }
-export default AddTask
+export default AddIngredient
 
 /*
 
