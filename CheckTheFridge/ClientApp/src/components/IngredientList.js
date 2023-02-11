@@ -1,10 +1,15 @@
-import React, { Component } from 'react';
+import Ingredient from './Ingredient';
 
-export class IngredientList extends Component {
 
-    render() {
-        return <h2>List of Ingredients</h2>;
-
-    }
-
-};
+const IngredientList = ({ ingredientList, onDelete, onEdit }) => {
+    return (
+        <>
+            {
+                ingredientList.map((ingredient) => (
+                    <Ingredient key={ingredient.id} ingredient={ingredient} onDelete={onDelete} onEdit={onEdit} />
+                ))
+            }
+        </>
+    )
+}
+export default IngredientList;
