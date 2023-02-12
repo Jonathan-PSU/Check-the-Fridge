@@ -1,5 +1,5 @@
 import React, { useState, onSubmit, Component } from 'react';
-import { Form, Button } from 'react-bootstrap';
+import { Button, Form, FormGroup, Label, Input, Container, Row, Column } from 'reactstrap';
 import { v4 as uuidv4 } from 'uuid';
 
 const AddIngredient = ({ onSave }) => {
@@ -22,17 +22,17 @@ const AddIngredient = ({ onSave }) => {
     }
 
     return (
-        <form className="add-form" onSubmit={onSubmit}>
-            <div className="form-control">
-                <label>Ingredient</label>
-                <input type="text" placeholder="add ingredient" value={name} onChange={(e) => setName(e.target.value)} />
-            </div>
-            <div className="form-control">
-                <label>Description</label>
-                <input type="text" placeholder="add description" value={description} onChange={(e) => setDescription(e.target.value)} />
-            </div>
-            <input type="submit" className="btn btn-block" value="Save Ingredient" />
-        </form>
+        <Form className="border rounded p-5" onSubmit={onSubmit}>
+            <FormGroup>
+                <Label for="ingredient">Ingredient</Label>
+                <Input id="ingredient" type="text" placeholder="add ingredient" value={name} onChange={(e) => setName(e.target.value)} />
+            </FormGroup>
+            <FormGroup>
+                <Label for="description">Description</Label>
+                <Input id="description" type="text" placeholder="add description" value={description} onChange={(e) => setDescription(e.target.value)} />
+            </FormGroup>
+            <Button type="submit">Submit</Button>
+            </Form>
     )
 }
 export default AddIngredient
