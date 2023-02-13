@@ -1,6 +1,7 @@
 import React, { useState, onSubmit, Component } from 'react';
-import { Button, Form, FormGroup, Label, Input, Container, Row, Column } from 'reactstrap';
+import { Button, Form, FormGroup, Label, Input, Container, Row, Col } from 'reactstrap';
 import { v4 as uuidv4 } from 'uuid';
+import IngredientList from './IngredientList';
 
 const AddIngredient = ({ onSave }) => {
     const [name, setName] = useState('');
@@ -22,6 +23,7 @@ const AddIngredient = ({ onSave }) => {
     }
 
     return (
+
         <Form className="border rounded p-5" onSubmit={onSubmit}>
             <FormGroup>
                 <Label for="ingredient">Ingredient</Label>
@@ -32,7 +34,8 @@ const AddIngredient = ({ onSave }) => {
                 <Input id="description" type="text" placeholder="add description" value={description} onChange={(e) => setDescription(e.target.value)} />
             </FormGroup>
             <Button type="submit">Submit</Button>
-            </Form>
+                    </Form>
+       
     )
 }
 export default AddIngredient
