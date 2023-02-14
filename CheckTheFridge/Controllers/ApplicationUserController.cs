@@ -8,9 +8,22 @@ namespace CheckTheFridge.Controllers
     [Route("api/[controller]")]
     [ApiController]
 
-    public class AplicationUserController : ControllerBase
+    public class ApplicationUserController : ControllerBase
     {
+        private readonly DataContext _context;
+        public ApplicationUserController(DataContext context) 
+        {
+            _context = context;
+        }
+       
+        [HttpGet]
 
+        
+        public async Task<ActionResult<List<ApplicationUser>>> GetUsers()
+        {
+            return Ok(_context.ApplicationUsers.ToListAsync());
+        }
+        /*
         [HttpGet]
         public ApplicationUser GetUser(string id)
         {
@@ -38,6 +51,7 @@ namespace CheckTheFridge.Controllers
 
             return db.CreateUser(firstname, lastname, username, password);
         }
-    
+        */
+
     }
 }
