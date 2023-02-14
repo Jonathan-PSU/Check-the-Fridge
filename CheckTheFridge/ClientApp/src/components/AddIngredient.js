@@ -63,11 +63,13 @@ export function AddIngredient() {
             <Row>
                 <React.Fragment>
                     <Col className="border rounded p-5 mx-2 mt-3">
+                        <h1 style={{ textAlign: "center" }}>New Ingredient</h1>
+                        <h5 className='m-4' style={{ textAlign: "center" }}>Enter the ingredient name, description, and quantity about the ingredient to add to your fridge.</h5>
                         <IngredientForm onSave={addIngredient} />
                     </Col>
 
                     <Col className="border rounded p-5 mx-2 mt-3">
-                <h2>Ingredient List: {ingredientList.length}</h2>
+                <h1 style={{ textAlign: "center" }}>Ingredient List: {ingredientList.length}</h1>
                 {
                     ingredientList.length > 0 ?
                         (<IngredientList ingredientList={ingredientList} onDelete={deleteIngredient} onEdit={editIngredient} />) :

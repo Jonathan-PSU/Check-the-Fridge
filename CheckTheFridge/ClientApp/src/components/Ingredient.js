@@ -1,5 +1,7 @@
 
 import { ListGroup, ListGroupItem } from 'reactstrap';
+import { Button, Row, Col, Container } from 'reactstrap';
+
 
 const Ingredient = ({ ingredient, onDelete, onEdit }) => {
     return (
@@ -16,10 +18,12 @@ const Ingredient = ({ ingredient, onDelete, onEdit }) => {
                     <p className="ingredientQuan"><span className="textBold">Quantity:</span> {ingredient.quantity}
                     </p>
                 </div>
-                <div>
-                    <p><button onClick={() => onDelete(ingredient.id)}  />Delete</p>
-                    <p><button onClick={() => onEdit(ingredient.id)}  />Edit</p>
-                </div>
+                <Container>
+                    <Row>
+                        <Col><Button className="w-100" onClick={() => onEdit(ingredient.id)}>Edit</Button></Col>
+                        <Col><Button className="w-100" onClick={() => onDelete(ingredient.id)}>Delete</Button></Col>
+                    </Row>
+                </Container>
                 </ListGroupItem>
             </ListGroup>
     )

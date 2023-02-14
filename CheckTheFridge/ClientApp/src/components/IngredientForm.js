@@ -30,8 +30,6 @@ const AddIngredient = ({ onSave }) => {
     return (
 
         <Form onSubmit={onSubmit}>
-            <h1 style={{ textAlign: "center" }}>New Ingredient</h1>
-            <h5 className='m-4' style={{ textAlign: "center" }}>Enter the ingredient name, description, and quantity about the ingredient to add to your fridge.</h5>
             <FormGroup>
                 <Label for="ingredient">Ingredient</Label>
                 <Input id="ingredient" type="text" placeholder="add ingredient name" value={name} onChange={(e) => setName(e.target.value)} />
