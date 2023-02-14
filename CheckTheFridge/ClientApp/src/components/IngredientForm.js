@@ -29,7 +29,7 @@ const AddIngredient = ({ onSave }) => {
 
     return (
 
-        <Form className="border rounded p-3 mt-3" onSubmit={onSubmit}>
+        <Form onSubmit={onSubmit}>
             <h1 style={{ textAlign: "center" }}>New Ingredient</h1>
             <h5 className='m-4' style={{ textAlign: "center" }}>Enter the ingredient name, description, and quantity about the ingredient to add to your fridge.</h5>
             <FormGroup>

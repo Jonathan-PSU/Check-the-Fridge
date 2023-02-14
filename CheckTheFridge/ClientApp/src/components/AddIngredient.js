@@ -2,7 +2,7 @@ import React, { Component, useState, useEffect } from 'react';
 import IngredientForm from './IngredientForm';
 import { v4 as uuidv4 } from 'uuid';
 import IngredientList from './IngredientList';
-import {Container, Row, Col } from 'reactstrap';
+import { Container, Row, Col } from 'reactstrap';
 
 
 export function AddIngredient() {
@@ -62,17 +62,19 @@ export function AddIngredient() {
         <Container>
             <Row>
                 <React.Fragment>
-                    <Col>
+                    <Col className="border rounded p-5 mx-2 mt-3">
                         <IngredientForm onSave={addIngredient} />
                     </Col>
-                    <Col>
+
+                    <Col className="border rounded p-5 mx-2 mt-3">
                 <h2>Ingredient List: {ingredientList.length}</h2>
                 {
                     ingredientList.length > 0 ?
                         (<IngredientList ingredientList={ingredientList} onDelete={deleteIngredient} onEdit={editIngredient} />) :
                         ('No Ingredients Found!')
                         }
-                    </Col>
+                        </Col>
+
                 </React.Fragment>
             </Row>
         </Container>
