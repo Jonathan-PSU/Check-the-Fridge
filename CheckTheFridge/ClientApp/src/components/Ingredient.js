@@ -12,6 +12,8 @@ const Ingredient = ({ ingredient, onDelete, onEdit }) => {
                     </p>
                     <p className="ingredientID"><span className="textBold">ID:</span> {ingredient.id}
                     </p>
+                    <p className="ingredientQuan"><span className="textBold">Quantity:</span> {ingredient.quantity}
+                    </p>
                 </div>
                 <div>
                     <p><button onClick={() => onDelete(ingredient.id)}  />Delete</p>
