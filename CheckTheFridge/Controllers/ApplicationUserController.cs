@@ -5,7 +5,7 @@ using CheckTheFridge.Models;
 
 namespace CheckTheFridge.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
 
     public class ApplicationUserController : ControllerBase
@@ -16,14 +16,25 @@ namespace CheckTheFridge.Controllers
             _context = context;
         }
        
-        [HttpGet]
+        [HttpGet("get")]
 
         
         public async Task<ActionResult<List<ApplicationUser>>> GetUsers()
         {
-            return Ok(_context.ApplicationUsers.ToListAsync());
+     
+             return Ok(await _context.ApplicationUsers.ToListAsync());
         }
+
         /*
+        [HttpGet("get")]
+
+        
+        public async IAsyncEnumerable<ApplicationUser> GetUser()
+        {
+            var users = _context.ApplicationUsers.AsAsyncEnumerable();
+            await foreach (var u in users)
+                yield return u;
+        }
         [HttpGet]
         public ApplicationUser GetUser(string id)
         {
