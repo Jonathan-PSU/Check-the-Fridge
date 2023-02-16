@@ -3,9 +3,12 @@ import './FetchData.css';
 
 const FetchData = () => {
     const [users, setUsers] = useState([]);
+    const [userID, setUserID] = useState(['None',]);
+    const [username, setUsername] = useState([]);
+    const [password, setPassword] = useState([]);  
 
     useEffect(() => {
-        fetch('ApplicationUser/get')
+        fetch('ApplicationUser/GetUsers')
             .then((results) => {
                 return results.json();
             })
@@ -14,9 +17,29 @@ const FetchData = () => {
             })
     }, [])
 
+    async function login(uname, pass) {
+        await fetch('ApplicationUser/Login/' + uname + '/' + pass, { method: 'POST' })
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error('Something went wrong');
+            })
+            .then((responseJson) => {
+                setUserID(responseJson);
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+
+    function handleSubmit(event) {
+        login(username, password);
+        event.preventDefault();
+    }
+    
     return (
-        <main>
-            
+        <main>         
                 <table>
                 <tr>
                     <th>Id</th>
@@ -36,7 +59,17 @@ const FetchData = () => {
                         </tr>
                     ) : <div>Loading...</div>
                 }
-                </table>  
+            </table>  
+
+            <form onSubmit={(event) => handleSubmit(event)} >          
+                    <input type="text"  name="name" onChange={(e) => setUsername(e.target.value)} />              
+                    <input type="text" name="password" onChange={(e) => setPassword(e.target.value)} />
+                <input type="submit" value="Submit" />
+            </form>
+            <br></br>
+            <div>
+                <h3>Id retrieved: <p>{userID}</p></h3>             
+            </div>
             
         </main>
     )
