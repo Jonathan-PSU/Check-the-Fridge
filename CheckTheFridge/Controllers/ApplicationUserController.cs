@@ -21,7 +21,6 @@ namespace CheckTheFridge.Controllers
         
         public async Task<ActionResult<List<ApplicationUser>>> GetUsers()
         {
-     
              return Ok(await _context.ApplicationUsers.ToListAsync());
         }
 
