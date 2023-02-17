@@ -1,9 +1,9 @@
-import React, { Component, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './FetchData.css';
 
 const FetchData = () => {
     const [users, setUsers] = useState([]);
-    const [userID, setUserID] = useState(['None',]);
+    const [userID, setUserID] = useState([0,]);
     const [username, setUsername] = useState([]);
     const [password, setPassword] = useState([]);  
 
@@ -40,7 +40,7 @@ const FetchData = () => {
     
     return (
         <main>         
-                <table>
+            <table>
                 <tr>
                     <th>Id</th>
                     <th>First Name</th>

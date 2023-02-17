@@ -41,20 +41,20 @@ namespace CheckTheFridge.Controllers
         //
         //POSTS
         //
-        [HttpPost("register")]
-        public async Task<IActionResult> Register(UserRegisterRequest request)
+        [HttpPost("Register/{FirstName}/{LastName}/{Username}/{Password}")]
+        public async Task<IActionResult> Register(string FirstName, string LastName, string Username, string Password)
         {
-            if (_context.ApplicationUsers.Any(u => u.Username == request.Username))
+            if (_context.ApplicationUsers.Any(u => u.Username == Username))
             {
                 return BadRequest("Username Taken");
             }
 
             var user = new ApplicationUser
             {
-                FirstName= request.FirstName,
-                LastName= request.LastName,
-                Username = request.Username,
-                Password= request.Password
+                FirstName= FirstName,
+                LastName= LastName,
+                Username= Username,
+                Password= Password
             };
 
             _context.ApplicationUsers.Add(user);
