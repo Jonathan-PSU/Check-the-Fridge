@@ -41,7 +41,6 @@ export default function LoginPage({ userToken }) {
             })
            
             .catch((error) => {
-                userToken(0)
                 console.log(error)
             })
     }
