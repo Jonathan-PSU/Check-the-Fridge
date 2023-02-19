@@ -12,26 +12,31 @@ export default function LoginPage({ userToken }) {
 
     // Function to check if username and password match in database. Returns response to token
     async function login(uname, pass) {
-        await fetch('ApplicationUser/Login/' + uname + '/' + pass, { method: 'POST' })
-            .then((response) => {
-                if (response.ok) {
-                    return response.json();
-                }
-                userToken(0);
-                throw new Error('Something went wrong');
-            })
-            .then((responseJson) => {
-                setUserID(responseJson);
-                userToken(responseJson);
-                return responseJson;
-            })
-            .catch((error) => {
-                userToken(0)
-                console.log(error)
-            })
+        if (uname === " " && pass === " ") //Guest Login for now
+            userToken(1)
+        else {
+            await fetch('ApplicationUser/Login/' + uname + '/' + pass, { method: 'POST' })
+                .then((response) => {
+                    if (response.ok) {
+                        return response.json();
+                    }
+                    userToken(0);
+                    throw new Error('Something went wrong');
+                })
+                .then((responseJson) => {
+                    setUserID(responseJson);
+                    userToken(responseJson);
+                    return responseJson;
+                })
+                .catch((error) => {
+                    userToken(0)
+                    console.log(error)
+                })
+        }
     }
     // Function to add a user to the database
     async function createUser(fname, lname, uname, pass) {
+       
         await fetch('ApplicationUser/Register/' + fname + '/' + lname + '/' + uname + '/' + pass, { method: 'POST' })
             .then((response) => {
                 if (response.ok) {
