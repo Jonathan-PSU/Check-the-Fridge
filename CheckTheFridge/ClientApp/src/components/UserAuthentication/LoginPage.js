@@ -1,4 +1,5 @@
 ﻿import React, { useState } from "react";
+import { Button, Form, FormGroup, Label, Input, Container, Row, Col } from 'reactstrap';
 import "./LoginPage.css";
 
 export default function LoginPage({ userToken }) {
@@ -31,75 +32,42 @@ export default function LoginPage({ userToken }) {
   /* Shows default login page/ sign up page */
   return (
     <div className="Auth-Page">
-      {toggle ? (
-        <form className="create-form">
-          <h2> Check The Fridge </h2>
-          <div className="input">
-            <label>
-              <p>First Name:</p>
-              <input type="text" onChange={(e) => setFirst(e.target.value)} />
-            </label>
-          </div>
-          <div className="input">
-            <label>
-              <p>Last Name:</p>
-              <input type="text" onChange={(e) => setLast(e.target.value)} />
-            </label>
-          </div>
-          <div className="input">
-            <label>
-              <p>Username:</p>
-              <input
-                type="text"
-                onChange={(e) => setUsername(e.target.value)}
-              />
-            </label>
-          </div>
-          <div className="input">
-            <label>
-              <p>Password:</p>
-              <input
-                type="password"
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </label>
-          </div>
-          <div className="submit">
-            <button onClick={handleCreate} type="submit">
-              Create
-            </button>
-          </div>
-        </form>
-      ) : (
-        <form className="login-form">
-          <h2> Check The Fridge </h2>
-          <div className="input">
-            <label>
-              <p>Username</p>
-              <input
-                type="text"
-                onChange={(e) => setUsername(e.target.value)}
-              />
-            </label>
-          </div>
-          <div className="input">
-            <label>
-              <p>Password</p>
-              <input
-                type="password"
-                onChange={(e) => setPassword(e.target.value)}
-              />
-            </label>
-          </div>
-
-          <div className="submit">
-            <button onClick={() => setToggle(true)}> Create Account</button>
-            <button type="submit" onClick={handleLogin}>
-              Submit
-            </button>
-          </div>
-        </form>
-      )}
+          {toggle ? (
+              <Form className="create-form">
+                  <h2> Check The Fridge </h2>
+                  <FormGroup>
+                      <Label>First Name:</Label>
+                      <Input type="text" onChange={(e) => setFirst(e.target.value)} />
+                  </FormGroup>
+                  <FormGroup>
+                      <Label>Last Name:</Label>
+                      <Input type="text" onChange={(e) => setLast(e.target.value)} />
+                  </FormGroup>
+                  <FormGroup>
+                      <Label>Username:</Label>
+                      <Input type="text" onChange={(e) => setUsername(e.target.value)} />
+                  </FormGroup>
+                  <FormGroup>
+                      <Label>Password:</Label>
+                      <Input type="password" onChange={(e) => setPassword(e.target.value)} />
+                  </FormGroup>
+                  <Button type="submit" onClick={handleCreate}>Create</Button>
+              </Form>
+          ) : (
+                  <Form className="login-form">
+                      <h2> Check The Fridge </h2>
+                      <FormGroup>
+                          <Label>Username:</Label>
+                          <Input type="text" onChange={(e) => setUsername(e.target.value)} />
+                      </FormGroup>
+                      <FormGroup>
+                          <Label>Password:</Label>
+                          <Input type="password" onChange={(e) => setPassword(e.target.value)} />
+                      </FormGroup>
+                      <Button onClick={() => setToggle(true)}>Create Account</Button>
+                      <Button type="submit" onClick={handleLogin}>Submit</Button>
+                  </Form>
+              )}
     </div>
   );
 }
