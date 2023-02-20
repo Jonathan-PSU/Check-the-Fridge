@@ -30,11 +30,11 @@ export default function LoginPage({ userToken }) {
   }
 
   /* Shows default login page/ sign up page */
-  return (
-    <div className="Auth-Page">
+    return (<>
+      <h2 style={{textAlign: "center"}}> Check The Fridge </h2>
+      <div className="border rounded m-5">
           {toggle ? (
               <Form className="create-form">
-                  <h2> Check The Fridge </h2>
                   <FormGroup>
                       <Label>First Name:</Label>
                       <Input type="text" onChange={(e) => setFirst(e.target.value)} />
@@ -50,12 +50,20 @@ export default function LoginPage({ userToken }) {
                   <FormGroup>
                       <Label>Password:</Label>
                       <Input type="password" onChange={(e) => setPassword(e.target.value)} />
-                  </FormGroup>
-                  <Button type="submit" onClick={handleCreate}>Create</Button>
+                    </FormGroup>
+                    <Row className="d-flex justify-content-center">
+                        <Col>
+                            <Button style={{ width: "100%" }} onClick={() => setToggle(false)}>Already have an account?</Button>
+                        </Col>
+                        <Col>
+                            <Button style={{ width: "100%" }} type="submit" onClick={handleCreate}>Create</Button>
+                        </Col>
+                    </Row>
+
+
               </Form>
           ) : (
                   <Form className="login-form">
-                      <h2> Check The Fridge </h2>
                       <FormGroup>
                           <Label>Username:</Label>
                           <Input type="text" onChange={(e) => setUsername(e.target.value)} />
@@ -64,10 +72,17 @@ export default function LoginPage({ userToken }) {
                           <Label>Password:</Label>
                           <Input type="password" onChange={(e) => setPassword(e.target.value)} />
                       </FormGroup>
-                      <Button onClick={() => setToggle(true)}>Create Account</Button>
-                      <Button type="submit" onClick={handleLogin}>Submit</Button>
+                      <Row className="d-flex justify-content-center">
+                          <Col>
+                              <Button style={{ width: "100%" }} onClick={() => setToggle(true)}>Create Account</Button>
+                          </Col>
+                          <Col>
+                              <Button style={{ width: "100%" }} type="submit" onClick={handleLogin}>Login</Button>
+                          </Col>
+                       </Row>
                   </Form>
               )}
-    </div>
+        </div>
+        </>
   );
 }
