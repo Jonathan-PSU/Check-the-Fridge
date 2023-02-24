@@ -1,6 +1,5 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using CheckTheFridge.DBInterface;
 using CheckTheFridge.Models;
 using System.Security.Cryptography;
 
@@ -32,9 +31,9 @@ namespace CheckTheFridge.Controllers
 
             if (user == null)
             {
-                return BadRequest("Doesnt Exist");
+                return BadRequest("There is no user associated with this Id");
             }
-          
+           
             return Ok(user);
         }
 
@@ -51,10 +50,10 @@ namespace CheckTheFridge.Controllers
 
             var user = new ApplicationUser
             {
-                FirstName= FirstName,
-                LastName= LastName,
-                Username= Username,
-                Password= Password
+                FirstName = FirstName,
+                LastName = LastName,
+                Username = Username,
+                Password = Password
             };
 
             _context.ApplicationUsers.Add(user);
@@ -68,7 +67,7 @@ namespace CheckTheFridge.Controllers
             var user = await _context.ApplicationUsers.FirstOrDefaultAsync(u => u.Username == Username);
             if (user == null)
             {
-                return BadRequest("NOpe");
+                return BadRequest("Doesn't exist");
             }
 
             if (user.Password != Password)
