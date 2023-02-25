@@ -1,4 +1,5 @@
 ﻿import React, { useState } from "react";
+import ReactDOM from "react-dom";
 import "./LoginPage.css";
 
 export default function LoginPage({ userToken }) {
@@ -8,11 +9,13 @@ export default function LoginPage({ userToken }) {
   const [last, setLast] = useState();
   const [username, setUsername] = useState();
   const [password, setPassword] = useState();
-  const [toggle, setToggle] = useState(false);
+    const [toggle, setToggle] = useState(false);
+    const [loginError, setLoginError] = useState(false);
+
 
     // Function to check if username and password match in database. Returns response to token
     async function login(uname, pass) {
-        if (uname === " " && pass === " ") //Guest Login for now
+        if (uname === " " && pass === " ")
             userToken(1)
         else {
             await fetch('ApplicationUser/Login/' + uname + '/' + pass, { method: 'POST' })
@@ -25,12 +28,13 @@ export default function LoginPage({ userToken }) {
                 })
                 .then((responseJson) => {
                     setUserID(responseJson);
+                    console.log(responseJson);
                     userToken(responseJson);
                     return responseJson;
                 })
                 .catch((error) => {
-                    userToken(0)
                     console.log(error)
+                    setLoginError("true");
                 })
         }
     }
@@ -40,7 +44,9 @@ export default function LoginPage({ userToken }) {
         await fetch('ApplicationUser/Register/' + fname + '/' + lname + '/' + uname + '/' + pass, { method: 'POST' })
             .then((response) => {
                 if (response.ok) {
-                    setToggle(false)
+                    console.log(response);
+                    userToken(response);
+
                 }            
                 throw new Error('Not created');
             })
@@ -135,7 +141,13 @@ export default function LoginPage({ userToken }) {
             </button>
           </div>
         </form>
-      )}
+              )}
+          {loginError == "true" ? (
+              <div className = "login-error" >Invalid username or password </div>
+          ) : (
+                  <div></div>
+
+           )}
     </div>
   );
 }
