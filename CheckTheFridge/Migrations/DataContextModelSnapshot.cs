@@ -49,6 +49,27 @@ namespace CheckTheFridge.Migrations
 
                     b.ToTable("ApplicationUsers");
                 });
+
+            modelBuilder.Entity("CheckTheFridge.Models.Ingredient", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Ingredients");
+                });
 #pragma warning restore 612, 618
         }
     }

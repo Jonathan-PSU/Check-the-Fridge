@@ -8,7 +8,8 @@ import { Container, Row, Col } from 'reactstrap';
 export function AddIngredient() {
 
     const [ingredientList, setIngredientList] = useState([]);
-
+    const [name, setName] = useState();
+    const [desc, setDesc] = useState();
 
     const getIngredientList = JSON.parse(localStorage.getItem("ingredientAdded"));
     useEffect(() => {
@@ -20,15 +21,39 @@ export function AddIngredient() {
         }
     }, [])
 
+    async function addIngredient2(ingredient) {
+
+        //console.log("Ingredient.form data: ", ingredient.name, ingredient.description)
+        //const id = uuidv4();
+        //ingredient.id = id;
+
+        await fetch('Ingredient/Add/' + ingredient.name + '/' + ingredient.description + '/' + ingredient.id + '/' + ingredient.quantity, { method: 'POST' })
+            .then((response) => {
+                if (response.ok) {
+                    console.log('Ingredient created')
+                }
+                else
+                    throw new Error('Ingredient not created');
+            })
+
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+
+    
     // Add Ingredient
     const addIngredient = (ingredient) => {
         const id = uuidv4();
-        const newIngredient = { id, ...ingredient }
-        setIngredientList([...ingredientList, newIngredient]);
-        localStorage.setItem("ingredientAdded", JSON.stringify([...ingredientList, newIngredient]));
-        console.log('Local ingredient saved')
+        //const newIngredient = { id, ...ingredient }
+        //setIngredientList([...ingredientList, newIngredient]);
+        //localStorage.setItem("ingredientAdded", JSON.stringify([...ingredientList, newIngredient]));
+        //console.log('Local ingredient saved')
+        //console.log(ingredient)
+        ingredient.id = id;
+        addIngredient2(ingredient);
     }
-
+    
     // Delete Ingredient
     const deleteIngredient = (id) => {
         const deleteIngredient = ingredientList.filter((ingredient) => ingredient.id !== id);
@@ -67,7 +92,6 @@ export function AddIngredient() {
                         <h5 className='m-4' style={{ textAlign: "center" }}>Enter the ingredient name, description, and quantity about the ingredient to add to your fridge.</h5>
                         <IngredientForm onSave={addIngredient} />
                     </Col>
-
                     <Col className="border rounded p-5 mx-2 mt-3">
                 <h1 style={{ textAlign: "center" }}>Ingredient List: {ingredientList.length}</h1>
                 {
@@ -76,11 +100,8 @@ export function AddIngredient() {
                         ('No Ingredients Found!')
                         }
                         </Col>
-
                 </React.Fragment>
             </Row>
         </Container>
         );
-
 };
-

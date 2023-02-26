@@ -7,6 +7,8 @@ const AddIngredient = ({ onSave }) => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [quantity, setQuantity] = useState(1);
+    const [id, setid] = useState('');
+
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -17,11 +19,12 @@ const AddIngredient = ({ onSave }) => {
         } else if (name && !description) {
             console.log('Description not added)');
         } else {
-            onSave({ name, description, quantity });
+            onSave({ name, description, quantity, id });
         }
         setName('');
         setDescription('');
         setQuantity(1);
+        setid('');
     }
 
     const updateQuantity = (val) => {
