@@ -7,7 +7,7 @@ const AddIngredient = ({ onSave }) => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [quantity, setQuantity] = useState(1);
-    const [id, setid] = useState('');
+    const [id, setid] = useState(0);
 
 
     const onSubmit = (e) => {
@@ -24,7 +24,7 @@ const AddIngredient = ({ onSave }) => {
         setName('');
         setDescription('');
         setQuantity(1);
-        setid('');
+        //setid('');
     }
 
     const updateQuantity = (val) => {

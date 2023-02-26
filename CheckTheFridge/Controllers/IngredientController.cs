@@ -42,7 +42,7 @@ namespace CheckTheFridge.Controllers
         //POSTS
         //
         [HttpPost("Add/{Name}/{Description}/{Id}/{Quantity}")]
-        public async Task<IActionResult> Add(string Name, string Description, string Id, int Quantity)
+        public async Task<IActionResult> Add(string Name, string Description, int Id, int Quantity)
         {
             if (_context.Ingredients.Any(i => i.Name == Name))
             {

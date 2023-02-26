@@ -44,13 +44,13 @@ export function AddIngredient() {
     
     // Add Ingredient
     const addIngredient = (ingredient) => {
-        const id = uuidv4();
+        //const id = uuidv4();
         //const newIngredient = { id, ...ingredient }
         //setIngredientList([...ingredientList, newIngredient]);
         //localStorage.setItem("ingredientAdded", JSON.stringify([...ingredientList, newIngredient]));
         //console.log('Local ingredient saved')
         //console.log(ingredient)
-        ingredient.id = id;
+        //ingredient.id = id;
         addIngredient2(ingredient);
     }
     
@@ -90,7 +90,7 @@ export function AddIngredient() {
                     <Col className="border rounded p-5 mx-2 mt-3">
                         <h1 style={{ textAlign: "center" }}>New Ingredient</h1>
                         <h5 className='m-4' style={{ textAlign: "center" }}>Enter the ingredient name, description, and quantity about the ingredient to add to your fridge.</h5>
-                        <IngredientForm onSave={addIngredient} />
+                        <IngredientForm onSave={addIngredient2} />
                     </Col>
                     <Col className="border rounded p-5 mx-2 mt-3">
                 <h1 style={{ textAlign: "center" }}>Ingredient List: {ingredientList.length}</h1>
