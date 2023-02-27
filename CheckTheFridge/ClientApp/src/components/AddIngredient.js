@@ -21,7 +21,7 @@ export function AddIngredient() {
         }
     }, [])
 
-    async function addIngredient2(ingredient) {
+    async function addIngredient(ingredient) {
 
         //console.log("Ingredient.form data: ", ingredient.name, ingredient.description)
         //const id = uuidv4();
@@ -43,7 +43,7 @@ export function AddIngredient() {
 
     
     // Add Ingredient
-    const addIngredient = (ingredient) => {
+    //const addIngredient = (ingredient) => {
         //const id = uuidv4();
         //const newIngredient = { id, ...ingredient }
         //setIngredientList([...ingredientList, newIngredient]);
@@ -51,8 +51,8 @@ export function AddIngredient() {
         //console.log('Local ingredient saved')
         //console.log(ingredient)
         //ingredient.id = id;
-        addIngredient2(ingredient);
-    }
+        //addIngredient2(ingredient);
+    //}
     
     // Delete Ingredient
     const deleteIngredient = (id) => {
@@ -90,7 +90,7 @@ export function AddIngredient() {
                     <Col className="border rounded p-5 mx-2 mt-3">
                         <h1 style={{ textAlign: "center" }}>New Ingredient</h1>
                         <h5 className='m-4' style={{ textAlign: "center" }}>Enter the ingredient name, description, and quantity about the ingredient to add to your fridge.</h5>
-                        <IngredientForm onSave={addIngredient2} />
+                        <IngredientForm onSave={addIngredient} />
                     </Col>
                     <Col className="border rounded p-5 mx-2 mt-3">
                 <h1 style={{ textAlign: "center" }}>Ingredient List: {ingredientList.length}</h1>
