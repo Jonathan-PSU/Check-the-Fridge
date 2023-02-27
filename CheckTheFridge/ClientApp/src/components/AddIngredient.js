@@ -23,7 +23,7 @@ export function AddIngredient() {
 
     async function addIngredient(ingredient) {
 
-        //console.log("Ingredient.form data: ", ingredient.name, ingredient.description)
+        console.log("Ingredient.form data: ", ingredient.name, ingredient.description, ingredient.id, ingredient.quantity)
         //const id = uuidv4();
         //ingredient.id = id;
 
@@ -31,28 +31,21 @@ export function AddIngredient() {
             .then((response) => {
                 if (response.ok) {
                     console.log('Ingredient created')
+                    console.log(response);
                 }
-                else
-                    throw new Error('Ingredient not created');
+                else {
+                    console.log(response.statusText);
+                    console.log(response.body);
+
+                    throw new Error('Ingredient not created.', response.json());
+
+                }
             })
 
             .catch((error) => {
                 console.log(error)
             })
     }
-
-    
-    // Add Ingredient
-    //const addIngredient = (ingredient) => {
-        //const id = uuidv4();
-        //const newIngredient = { id, ...ingredient }
-        //setIngredientList([...ingredientList, newIngredient]);
-        //localStorage.setItem("ingredientAdded", JSON.stringify([...ingredientList, newIngredient]));
-        //console.log('Local ingredient saved')
-        //console.log(ingredient)
-        //ingredient.id = id;
-        //addIngredient2(ingredient);
-    //}
     
     // Delete Ingredient
     const deleteIngredient = (id) => {

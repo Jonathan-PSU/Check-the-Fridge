@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using CheckTheFridge.DBInterface;
 using CheckTheFridge.Models;
 using System.Security.Cryptography;
+using Microsoft.EntityFrameworkCore.Query;
 
 namespace CheckTheFridge.Controllers
 {
@@ -44,9 +45,13 @@ namespace CheckTheFridge.Controllers
         [HttpPost("Add/{Name}/{Description}/{Id}/{Quantity}")]
         public async Task<IActionResult> Add(string Name, string Description, int Id, int Quantity)
         {
-            if (_context.Ingredients.Any(i => i.Name == Name))
+            var match = _context.Ingredients.SingleOrDefault(i => i.Name == Name);
+
+            if (match != null)
             {
-                return BadRequest("Ingredient already exists");
+                match.Quantity += Quantity;
+                return Ok("Ingredient exists, quantity updated.");
+
             }
 
             var ingredient = new Ingredient
