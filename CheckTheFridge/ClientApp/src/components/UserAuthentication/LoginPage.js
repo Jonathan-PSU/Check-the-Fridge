@@ -128,7 +128,7 @@ export default function LoginPage({ userToken }) {
                 <Button
                   style={{ width: '100%' }}
                   type='submit'
-                  onClick={handleCreate}
+                  onClick={(event) => handleCreate(event)}
                 >
                   Create
                 </Button>
@@ -164,7 +164,7 @@ export default function LoginPage({ userToken }) {
                 <Button
                   style={{ width: '100%' }}
                   type='submit'
-                  onClick={handleLogin}
+                  onClick={(event) => handleLogin(event)}
                 >
                   Login
                 </Button>
