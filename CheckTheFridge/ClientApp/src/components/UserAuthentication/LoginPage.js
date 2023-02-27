@@ -94,24 +94,26 @@ export default function LoginPage({ userToken }) {
         {toggle ? (
           <Form className='create-form'>
             <FormGroup>
-              <Label>First Name:</Label>
-              <Input type='text' onChange={(e) => setFirst(e.target.value)} />
+              <Label for="fname">First Name:</Label>
+              <Input id="fname" type='text' autoComplete='off' onChange={(e) => setFirst(e.target.value)} />
             </FormGroup>
             <FormGroup>
-              <Label>Last Name:</Label>
-              <Input type='text' onChange={(e) => setLast(e.target.value)} />
+              <Label for="lname">Last Name:</Label>
+                          <Input id="lname" type='text' autoComplete='off' onChange={(e) => setLast(e.target.value)} />
             </FormGroup>
             <FormGroup>
-              <Label>Username:</Label>
-              <Input
-                type='text'
+              <Label for="username">Username:</Label>
+              <Input id="username"
+                              type='text'
+                              autoComplete='off'
                 onChange={(e) => setUsername(e.target.value)}
               />
             </FormGroup>
             <FormGroup>
-              <Label>Password:</Label>
-              <Input
-                type='password'
+              <Label for="password">Password:</Label>
+              <Input id="password"
+                              type='password'
+                              autoComplete='off'
                 onChange={(e) => setPassword(e.target.value)}
               />
             </FormGroup>
@@ -119,7 +121,8 @@ export default function LoginPage({ userToken }) {
               <Col>
                 <Button
                   style={{ width: '100%' }}
-                  onClick={() => setToggle(false)}
+                                  onClick={() => setToggle(false)}
+                  color='link'
                 >
                   Already have an account?
                 </Button>
@@ -138,15 +141,15 @@ export default function LoginPage({ userToken }) {
         ) : (
           <Form className='login-form'>
             <FormGroup>
-              <Label>Username:</Label>
-              <Input
+              <Label for="username">Username:</Label>
+              <Input id="username"
                 type='text'
                 onChange={(e) => setUsername(e.target.value)}
               />
             </FormGroup>
             <FormGroup>
-              <Label>Password:</Label>
-              <Input
+              <Label for="password">Password:</Label>
+              <Input id="password"
                 type='password'
                 onChange={(e) => setPassword(e.target.value)}
               />
