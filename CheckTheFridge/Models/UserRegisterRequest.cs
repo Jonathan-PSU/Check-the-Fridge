@@ -1,16 +1,17 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace CheckTheFridge.Models
 {
-    public class ApplicationUser
+    public class UserRegisterRequest
     {
-        
-        public int Id { get; set; }
+        [Required]
         public string FirstName { get; set; } = string.Empty;
+        [Required] 
         public string LastName { get; set; } = string.Empty;
+        [Required]
         public string Username { get; set; } = string.Empty;
+        [Required, MinLength(6)]
         public string Password { get; set; } = string.Empty;
-
     }
 }
+

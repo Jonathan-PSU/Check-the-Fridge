@@ -1,59 +1,77 @@
-import React, { Component } from 'react';
+import React, { useEffect, useState } from 'react';
+import './FetchData.css';
 
-export class FetchData extends Component {
-  static displayName = FetchData.name;
+const FetchData = () => {
+    const [users, setUsers] = useState([]);
+    const [userID, setUserID] = useState([0,]);
+    const [username, setUsername] = useState([]);
+    const [password, setPassword] = useState([]);  
 
-  constructor(props) {
-    super(props);
-    this.state = { forecasts: [], loading: true };
-  }
+    useEffect(() => {
+        fetch('ApplicationUser/GetUsers')
+            .then((results) => {
+                return results.json();
+            })
+            .then(data => {
+                setUsers(data);
+            })
+    }, [])
 
-  componentDidMount() {
-    this.populateWeatherData();
-  }
+    async function login(uname, pass) {
+        await fetch('ApplicationUser/Login/' + uname + '/' + pass, { method: 'POST' })
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                }
+                throw new Error('Something went wrong');
+            })
+            .then((responseJson) => {
+                setUserID(responseJson);
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
 
-  static renderForecastsTable(forecasts) {
+    function handleSubmit(event) {
+        login(username, password);
+        event.preventDefault();
+    }
+    
     return (
-      <table className='table table-striped' aria-labelledby="tabelLabel">
-        <thead>
-          <tr>
-            <th>Date</th>
-            <th>Temp. (C)</th>
-            <th>Temp. (F)</th>
-            <th>Summary</th>
-          </tr>
-        </thead>
-        <tbody>
-          {forecasts.map(forecast =>
-            <tr key={forecast.date}>
-              <td>{forecast.date}</td>
-              <td>{forecast.temperatureC}</td>
-              <td>{forecast.temperatureF}</td>
-              <td>{forecast.summary}</td>
-            </tr>
-          )}
-        </tbody>
-      </table>
-    );
-  }
+        <main>         
+            <table>
+                <tr>
+                    <th>Id</th>
+                    <th>First Name</th>
+                    <th>Last Name</th>
+                    <th>Username</th>
+                    <th>Password</th>
+                </tr>
+                {
+                    (users != null) ? users.map((user) =>
+                        <tr>
+                            <td>{user.id}</td>
+                            <td>{user.firstName}</td>
+                            <td>{user.lastName}</td>
+                            <td>{user.username}</td>
+                            <td>{user.password}</td>
+                        </tr>
+                    ) : <div>Loading...</div>
+                }
+            </table>  
 
-  render() {
-    let contents = this.state.loading
-      ? <p><em>Loading...</em></p>
-      : FetchData.renderForecastsTable(this.state.forecasts);
-
-    return (
-      <div>
-        <h1 id="tabelLabel" >Weather forecast</h1>
-        <p>This component demonstrates fetching data from the server.</p>
-        {contents}
-      </div>
-    );
-  }
-
-  async populateWeatherData() {
-    const response = await fetch('weatherforecast');
-    const data = await response.json();
-    this.setState({ forecasts: data, loading: false });
-  }
+            <form onSubmit={(event) => handleSubmit(event)} >          
+                    <input type="text"  name="name" onChange={(e) => setUsername(e.target.value)} />              
+                    <input type="text" name="password" onChange={(e) => setPassword(e.target.value)} />
+                <input type="submit" value="Submit" />
+            </form>
+            <br></br>
+            <div>
+                <h3>Id retrieved: <p>{userID}</p></h3>             
+            </div>
+            
+        </main>
+    )
 }
+export default FetchData;
