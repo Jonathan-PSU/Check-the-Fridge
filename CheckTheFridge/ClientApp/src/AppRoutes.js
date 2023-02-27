@@ -3,6 +3,7 @@ import  FetchData  from "./components/FetchData";
 import { Home } from "./components/Home";
 import { IngredientList } from "./components/IngredientList";
 import { AddIngredient } from "./components/AddIngredient";
+import Recipe from "./components/RecipeBrowser/RecipeList";
 
 
 const AppRoutes = [
@@ -11,8 +12,8 @@ const AppRoutes = [
     element: <Home />
   },
   {
-    path: '/counter',
-    element: <Counter />
+    path: '/recipe-lookup',
+    element: <Recipe />
   },
   {
     path: '/fetch-data',
