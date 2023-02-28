@@ -79,7 +79,7 @@ export default function LoginPage({ userToken }) {
     return (
         <>
             <h2 style={{ textAlign: 'center' }}> Check The Fridge </h2>
-            <div className='border rounded m-5'>
+            <div className='border rounded m-5' style={{ backgroundColor: '#E9EBF8'}}>
                 {toggle ? (<form className='create-form'>
                     <FormGroup>
                         <Label for="fname">First Name:</Label>
@@ -98,12 +98,9 @@ export default function LoginPage({ userToken }) {
                         <Input id="password" name='password' type='password' autoComplete='off' onChange={(e) => setPassword(e.target.value)} />
                     </FormGroup>
                     <Row className='d-flex justify-content-center'>
-                        <Col>
-                            <Button style={{ width: '100%' }} onClick={() => setToggle(false)} color='link'>Already have an account?</Button>
-                        </Col>
-                        <Col>
-                            <Button style={{ width: '100%' }} type='submit' onClick={(event) => handleCreate(event)}>Create</Button>
-                        </Col>
+                        <Button className='w-25' type='submit' onClick={(event) => handleCreate(event)}>Create</Button>
+                        <Button outline style={{ color: '#2F4858' }} onClick={() => setToggle(false)}>Already have an account?</Button>
+                       
                     </Row>
                 </form>) :
                     (<Form className='login-form'>
