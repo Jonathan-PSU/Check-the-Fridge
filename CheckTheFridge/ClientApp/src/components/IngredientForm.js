@@ -7,6 +7,8 @@ const AddIngredient = ({ onSave }) => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [quantity, setQuantity] = useState(1);
+    const [id, setid] = useState(0);
+
 
     const onSubmit = (e) => {
         e.preventDefault();
@@ -17,11 +19,12 @@ const AddIngredient = ({ onSave }) => {
         } else if (name && !description) {
             console.log('Description not added)');
         } else {
-            onSave({ name, description, quantity });
+            onSave({ name, description, quantity, id });
         }
         setName('');
         setDescription('');
         setQuantity(1);
+        //setid('');
     }
 
     const updateQuantity = (val) => {
@@ -43,7 +46,7 @@ const AddIngredient = ({ onSave }) => {
                 <Container className="d-flex justify-content-start gx-0">
                     <Row className="gx-0" style={{ width: "50%" }}>
                         <Col md={3}><Button outline color="secondary" style={{ width: "100%" }} onClick={() => updateQuantity(-1)}>-</Button></Col>
-                        <Col md={4}><Input className="text-center" type="text" value={quantity}></Input></Col>
+                        <Col md={4}><Input className="text-center" type="text" value={quantity} onChange={(e) => setQuantity(e.target.value)}></Input></Col>
                         <Col md={3}><Button outline color="secondary" style={{ width: "100%" }}  onClick={() => updateQuantity(1)}>+</Button></Col>
                     </Row>
                 </Container>
