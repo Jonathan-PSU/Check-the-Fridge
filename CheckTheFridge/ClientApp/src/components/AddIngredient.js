@@ -11,15 +11,18 @@ export function AddIngredient() {
     const [name, setName] = useState();
     const [desc, setDesc] = useState();
 
-    const getIngredientList = JSON.parse(localStorage.getItem("ingredientAdded"));
+
     useEffect(() => {
-        if (getIngredientList == null) {
-            console.log('Ingredient list is empty')
-            setIngredientList([])
-        } else {
-            setIngredientList(getIngredientList);
-        }
+        fetch('Ingredient/GetIngredients')
+            .then((results) => {
+                console.log(results);
+                return results.json();
+            })
+            .then(data => {
+                setIngredientList(data);
+            })
     }, [])
+
 
     async function addIngredient(ingredient) {
 
