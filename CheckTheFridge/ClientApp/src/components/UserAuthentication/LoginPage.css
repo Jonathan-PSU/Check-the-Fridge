@@ -1,6 +1,6 @@
 ﻿.login-form, .create-form {
 
-    margin: 100px 100px 100px ;
+    margin: 100px 100px 15px ;
     display: flex;
     justify-content: center;
     flex-flow:column;
@@ -11,6 +11,12 @@
     padding-top: 12px;
     margin: auto;
    
+}
+.login-error {
+    display: flex;
+    justify-content: center;
+    color: red;
+    font-weight: bold;
 }
 
 

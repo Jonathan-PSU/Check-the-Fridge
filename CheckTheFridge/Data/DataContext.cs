@@ -8,6 +8,11 @@ namespace CheckTheFridge.Data
         public DataContext(DbContextOptions<DataContext> options) : base(options) { }
 
         public DbSet<ApplicationUser> ApplicationUsers { get; set; }
+
+        public DbSet<Ingredient> Ingredients { get; set; }
+
+        //public DbSet<Recipe> Recipes { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);

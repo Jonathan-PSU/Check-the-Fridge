@@ -8,27 +8,48 @@ import { Container, Row, Col } from 'reactstrap';
 export function AddIngredient() {
 
     const [ingredientList, setIngredientList] = useState([]);
+    const [name, setName] = useState();
+    const [desc, setDesc] = useState();
 
 
-    const getIngredientList = JSON.parse(localStorage.getItem("ingredientAdded"));
     useEffect(() => {
-        if (getIngredientList == null) {
-            console.log('Ingredient list is empty')
-            setIngredientList([])
-        } else {
-            setIngredientList(getIngredientList);
-        }
+        fetch('Ingredient/GetIngredients')
+            .then((results) => {
+                console.log(results);
+                return results.json();
+            })
+            .then(data => {
+                setIngredientList(data);
+            })
     }, [])
 
-    // Add Ingredient
-    const addIngredient = (ingredient) => {
-        const id = uuidv4();
-        const newIngredient = { id, ...ingredient }
-        setIngredientList([...ingredientList, newIngredient]);
-        localStorage.setItem("ingredientAdded", JSON.stringify([...ingredientList, newIngredient]));
-        console.log('Local ingredient saved')
-    }
 
+    async function addIngredient(ingredient) {
+
+        console.log("Ingredient.form data: ", ingredient.name, ingredient.description, ingredient.id, ingredient.quantity)
+        //const id = uuidv4();
+        //ingredient.id = id;
+
+        await fetch('Ingredient/Add/' + ingredient.name + '/' + ingredient.description + '/' + ingredient.id + '/' + ingredient.quantity, { method: 'POST' })
+            .then((response) => {
+                if (response.ok) {
+                    console.log('Ingredient created')
+                    console.log(response);
+                }
+                else {
+                    console.log(response.statusText);
+                    console.log(response.body);
+
+                    throw new Error('Ingredient not created.', response.json());
+
+                }
+            })
+
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+    
     // Delete Ingredient
     const deleteIngredient = (id) => {
         const deleteIngredient = ingredientList.filter((ingredient) => ingredient.id !== id);
@@ -67,7 +88,6 @@ export function AddIngredient() {
                         <h5 className='m-4' style={{ textAlign: "center" }}>Enter the ingredient name, description, and quantity about the ingredient to add to your fridge.</h5>
                         <IngredientForm onSave={addIngredient} />
                     </Col>
-
                     <Col className="border rounded p-5 mx-2 mt-3">
                 <h1 style={{ textAlign: "center" }}>Ingredient List: {ingredientList.length}</h1>
                 {
@@ -76,11 +96,8 @@ export function AddIngredient() {
                         ('No Ingredients Found!')
                         }
                         </Col>
-
                 </React.Fragment>
             </Row>
         </Container>
         );
-
 };
-
