@@ -1,12 +1,23 @@
 ﻿import React from 'react';
 import { useState } from 'react';
 import getIngredients from './getIngredients';
+import ingredientAvailable from './getInventory';
 import './recipeBrowseStyles.css';
 
 const RecipeItem = (getRecipe) => {
 
-    const [ingredientsList, setIngredients] = useState(getIngredients(getRecipe));
+    function findAmount(ing) {
+        let amount = 0;
+        for (let i = 0; i < ing.length; i++) {
+            if (ing[i].Available == true) { amount += 1;}
+        }
+        return amount;
+    }
+
+    const [ingredientsList, setIngredients] = useState(ingredientAvailable(getIngredients(getRecipe)));
     console.log(ingredientsList);
+    const avail = findAmount(ingredientsList);
+    const total = ingredientsList.length;
 
     return (
         <>
@@ -24,9 +35,11 @@ const RecipeItem = (getRecipe) => {
                             </div>
                             <div className = "addBtn"> + Add Recipe</div>
                         </div>
-                        <h5>Ingredients Needed</h5>
+                        <h5>Ingredients {avail} of {total}</h5>
                         {ingredientsList.map((ing) => (
-                            <li>{ing[1]} {ing[0]}</li>
+                            (ing.Available != true) ?
+                                <li>{ing.Name} {ing.Amount}</li> :
+                                <li className='isAvailable'> {ing.Name} {ing.Amount}</li>
 
                         ))}
 
