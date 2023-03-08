@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CheckTheFridge.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230214170716_createInitial")]
-    partial class createInitial
+    [Migration("20230308193018_UserIngredients")]
+    partial class UserIngredients
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -51,6 +51,54 @@ namespace CheckTheFridge.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("ApplicationUsers");
+                });
+
+            modelBuilder.Entity("CheckTheFridge.Models.Ingredient", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AppUserId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("MealDbId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
+
+                    b.ToTable("Ingredients");
+                });
+
+            modelBuilder.Entity("CheckTheFridge.Models.Ingredient", b =>
+                {
+                    b.HasOne("CheckTheFridge.Models.ApplicationUser", "AppUser")
+                        .WithMany("FridgeIngredients")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+                });
+
+            modelBuilder.Entity("CheckTheFridge.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("FridgeIngredients");
                 });
 #pragma warning restore 612, 618
         }
