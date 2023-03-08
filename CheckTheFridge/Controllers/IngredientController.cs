@@ -77,18 +77,22 @@ namespace CheckTheFridge.Controllers
             return Ok("Ingredient created!");
         }
         //Edit ingredient
-        [HttpPost("Edit/{Name}/{Description}")]
-        public async Task<IActionResult> Edit(int Id, string Name, string Description)
+        [HttpPut("Edit/{Id}")]
+        public async Task<IActionResult> Edit(int Id, string ? Name, string ? Description, int Quantity = 0)
         {
             var ingredient = await _context.Ingredients.FindAsync(Id);
             if (ingredient == null)
             {
                 return BadRequest("Could not find ingredient");
             }
+            if (Name != null)
+                ingredient.Name = Name;
+            if (Description != null)
+                ingredient.Description = Description;
+            if (Quantity != 0)
+                ingredient.Quantity = Quantity;
 
-            ingredient.Name = Name;
-            ingredient.Description = Description;
-
+            await _context.SaveChangesAsync();
             return Ok("Ingredient edited!");
         }
 
