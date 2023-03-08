@@ -38,6 +38,19 @@ namespace CheckTheFridge.Controllers
             return Ok(user);
         }
 
+        [HttpGet("{Id}/GetUserIngredients")]
+        public async Task<ActionResult<ApplicationUser>> GetUserIngredients(int Id)
+        {
+            var user = await _context.ApplicationUsers.Include("Ingredients").ToListAsync();
+
+            if (user == null)
+            {
+                return BadRequest("Doesnt Exist");
+            }
+
+            return Ok(user);
+        }
+
         //
         //POSTS
         //

@@ -10,6 +10,6 @@ namespace CheckTheFridge.Models
         public string Name { get; set; } = string.Empty;
         public string Description { get; set; } = string.Empty;
         public int Quantity { get; set; } = 0;
-        public int ApplicationUserId { get; set; } = 0;
+        public ApplicationUser ? ApplicationUser { get; set; }
     }
 }

@@ -4,6 +4,7 @@ using CheckTheFridge.DBInterface;
 using CheckTheFridge.Models;
 using System.Security.Cryptography;
 using Microsoft.EntityFrameworkCore.Query;
+using Azure.Core;
 
 namespace CheckTheFridge.Controllers
 {
@@ -43,23 +44,32 @@ namespace CheckTheFridge.Controllers
         //POSTS
         //
         [HttpPost("Add/{Name}/{Description}/{Id}/{Quantity}")]
-        public async Task<IActionResult> Add(string Name, string Description, int Id, int Quantity)
+        public async Task<IActionResult> Add(string Name, string Description, int Id, int Quantity, int MeadId, int UserId)
         {
-            var match = _context.Ingredients.SingleOrDefault(i => i.Name == Name);
+            var user = await _context.ApplicationUsers.FindAsync(UserId);
 
+            if (user == null)
+            {
+                return BadRequest("User DNE");
+            }
+
+            var match = _context.Ingredients.SingleOrDefault(i => i.Name == Name);             
+            
             if (match != null)
             {
                 match.Quantity += Quantity;
                 return Ok("Ingredient exists, quantity updated.");
-
             }
+            
 
             var ingredient = new Ingredient
             {
-                Name= Name,
-                Description= Description,
-                Quantity=Quantity,
-                Id =Id
+                Name = Name,
+                Description = Description,
+                Quantity = Quantity,
+                Id = Id,
+                MealDbId = MeadId,
+                ApplicationUser = user
             };
 
             _context.Ingredients.Add(ingredient);
