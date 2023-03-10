@@ -1,9 +1,40 @@
 ﻿import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import getIngredients from './getIngredients';
 import ingredientAvailable from './getInventory';
 import './recipeBrowseStyles.css';
 
+const user1 = [
+    { Name: 'Chicken' },
+    { Name: 'Olive Oil' },
+    { Name: 'Garlic' },
+    { Name: 'Salt' },
+    { Name: 'Onions' },
+    { Name: 'Tomato' },
+    { Name: 'Chicken Thighs' },
+    { Name: 'Butter' },
+    { Name: "Peanut Butter" },
+    { Name: "Sugar" },
+    { Name: "Egg" }
+];
+
+const Ingredient = (ing) => {
+
+    const [ingredient, setIngredient] = useState(ing);
+    useEffect(() => {
+        setIngredient(ing);
+    }, [ing]);
+
+    return (
+        <div>
+            {
+                (ingredient.data.Available != true) ?
+                    <li>{ingredient.data.Name} {ingredient.data.Amount}</li> :
+                    <li className='isAvailable'> {ingredient.data.Name} {ingredient.data.Amount}</li>
+            }
+        </div>
+        )
+}
 const RecipeItem = (getRecipe) => {
 
     function findAmount(ing) {
@@ -13,12 +44,17 @@ const RecipeItem = (getRecipe) => {
         }
         return amount;
     }
+    //const [userIngredients, setUserIngredients] = useState(); // Needs fetch call
 
-    const [ingredientsList, setIngredients] = useState(ingredientAvailable(getIngredients(getRecipe)));
-    console.log(ingredientsList);
-    const avail = findAmount(ingredientsList);
-    const total = ingredientsList.length;
+    const [ingredientsList, setIngredients] = useState(ingredientAvailable(getIngredients(getRecipe), user1));
+    const [avail, setAvail] = useState(0);
+    const [total, setTotal] = useState(0);
 
+    useEffect(() => {
+        setIngredients(ingredientAvailable(getIngredients(getRecipe),user1));
+        setAvail(findAmount(ingredientsList));
+        setTotal(ingredientsList.length);
+    }, [getRecipe]);
     return (
         <>
             <div className="recipeCard">
@@ -37,10 +73,7 @@ const RecipeItem = (getRecipe) => {
                         </div>
                         <h5>Ingredients {avail} of {total}</h5>
                         {ingredientsList.map((ing) => (
-                            (ing.Available != true) ?
-                                <li>{ing.Name} {ing.Amount}</li> :
-                                <li className='isAvailable'> {ing.Name} {ing.Amount}</li>
-
+                                <Ingredient data={ing}/>
                         ))}
 
                     </div>

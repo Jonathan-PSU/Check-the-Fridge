@@ -1,15 +1,5 @@
 ﻿
-const user1 = [
-    { Name: 'Chicken' },
-    { Name: 'Olive Oil' },
-    { Name: 'Garlic' },
-    { Name: 'Salt' },
-    { Name: 'Onions' },
-    { Name: 'Tomato' },
-    { Name: 'Chicken Thighs' },
-    { Name: 'Butter'}
-    ];
-function ingredientAvailable(ing) {
+function ingredientAvailable(ing, user1) {
 
     for (let i = 0; i < ing.length; i++) {
         for (let j = 0; j < user1.length; j++) {

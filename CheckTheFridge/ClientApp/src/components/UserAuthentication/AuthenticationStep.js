@@ -8,7 +8,7 @@ import LoginPage from "./LoginPage";
  * allow user to view webpage contents */
 
 export default function AuthorizeUser() {
-  const [token, setToken] = useState();
+  const [token, setToken] = useState(false);
 
   if (!token) {
     return <LoginPage userToken={setToken} />;
