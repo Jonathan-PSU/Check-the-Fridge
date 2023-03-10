@@ -86,11 +86,11 @@ namespace CheckTheFridge.Controllers
                 return BadRequest("NOpe");
             }
 
-            if (user.Password != Password)
+            if (!VerifyPasswordHash(Password, user.PasswordHash, user.PasswordSalt))
             {
                 return BadRequest("Password wrong");
             }
-         
+
             return Ok(user.Id);
         }
 
