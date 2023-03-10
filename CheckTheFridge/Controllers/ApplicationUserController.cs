@@ -64,12 +64,16 @@ namespace CheckTheFridge.Controllers
                 return BadRequest("Username Taken");
             }
 
+            CreatePasswordHash(Password,
+               out byte[] passwordHash,
+               out byte[] passwordSalt);
+
             var user = new ApplicationUser
             {
                 FirstName= FirstName,
                 LastName= LastName,
                 Username= Username,
-                Password= Password
+                pass
             };
 
             _context.ApplicationUsers.Add(user);
