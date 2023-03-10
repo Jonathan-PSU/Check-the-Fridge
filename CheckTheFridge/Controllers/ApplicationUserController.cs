@@ -73,7 +73,8 @@ namespace CheckTheFridge.Controllers
                 FirstName= FirstName,
                 LastName= LastName,
                 Username= Username,
-                pass
+                PasswordHash= passwordHash,
+                PasswordSalt= passwordSalt
             };
 
             _context.ApplicationUsers.Add(user);
