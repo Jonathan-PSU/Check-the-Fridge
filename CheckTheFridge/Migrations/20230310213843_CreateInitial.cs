@@ -5,7 +5,7 @@
 namespace CheckTheFridge.Migrations
 {
     /// <inheritdoc />
-    public partial class UserIngredients : Migration
+    public partial class CreateInitial : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -23,7 +23,7 @@ namespace CheckTheFridge.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ApplicationUsers1", x => x.Id);
+                    table.PrimaryKey("PK_ApplicationUsers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -32,15 +32,15 @@ namespace CheckTheFridge.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    MealDbId = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Description = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Quantity = table.Column<int>(type: "int", nullable: false),
+                    MealDbId = table.Column<int>(type: "int", nullable: false),
                     AppUserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Ingredients1", x => x.Id);
+                    table.PrimaryKey("PK_Ingredients", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Ingredients_ApplicationUsers_AppUserId",
                         column: x => x.AppUserId,
