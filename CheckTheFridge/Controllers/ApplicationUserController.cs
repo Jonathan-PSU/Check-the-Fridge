@@ -32,10 +32,25 @@ namespace CheckTheFridge.Controllers
 
             if (user == null)
             {
-                return BadRequest("Doesnt Exist");
+                return BadRequest("User Does Not Exist");
             }
           
             return Ok(user);
+        }
+
+        [HttpGet("{Id}/GetUserIngredients")]
+        public async Task<ActionResult<ApplicationUser>> GetUserIngredients(int Id)
+        {
+            var users = await _context.ApplicationUsers.Include("FridgeIngredients").ToListAsync();
+            var user = users.Find(x => x.Id == Id);
+            
+
+            if (user == null)
+            {
+                return BadRequest("User Does Not Exist");
+            }
+
+            return Ok(user.FridgeIngredients);
         }
 
         //
@@ -75,8 +90,7 @@ namespace CheckTheFridge.Controllers
             {
                 return BadRequest("Password wrong");
             }
-
-            //return Ok($"Welcome back, {user.Username}! :)");
+         
             return Ok(user.Id);
         }
 
