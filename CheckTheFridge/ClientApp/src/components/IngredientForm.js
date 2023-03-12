@@ -2,12 +2,28 @@ import React, { useState, onSubmit, Component } from 'react';
 import { Button, Form, FormGroup, Label, Input, Container, Row, Col } from 'reactstrap';
 import { v4 as uuidv4 } from 'uuid';
 import IngredientList from './IngredientList';
+import Select from 'react-select';
 
 const AddIngredient = ({ onSave }) => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [quantity, setQuantity] = useState(1);
     const [id, setid] = useState(0);
+
+    //const [ingredients2, setIngredients2] = useState([]);
+
+
+   /* const searchIngredient = () => {
+        fetch(`https://www.themealdb.com/api/json/v1/1/list.php?i=list`).then(res => res.json()).then(data => { setIngredients(data.meals); })
+    }*/
+    const ingredients2 = [
+        { label: 'Shark', value: 'Shark' },
+        { label: 'Dolphin', value: 'Dolphin' },
+        { label: 'Whale', value: 'Whale' },
+        { label: 'Octopus', value: 'Octopus' },
+        { label: 'Crab', value: 'Crab' },
+        { label: 'Lobster', value: 'Lobster' },
+    ];
 
 
     const onSubmit = (e) => {
@@ -35,7 +51,7 @@ const AddIngredient = ({ onSave }) => {
         <Form onSubmit={onSubmit}>
             <FormGroup>
                 <Label for="ingredient">Ingredient</Label>
-                <Input id="ingredient" type="text" placeholder="add ingredient name" value={name} onChange={(e) => setName(e.target.value)} />
+                <Select options={ingredients2}/>
             </FormGroup>
             <FormGroup>
                 <Label for="description">Description</Label>
