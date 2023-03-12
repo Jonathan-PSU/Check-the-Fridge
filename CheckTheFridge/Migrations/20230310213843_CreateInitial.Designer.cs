@@ -11,8 +11,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CheckTheFridge.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230308193018_UserIngredients")]
-    partial class UserIngredients
+    [Migration("20230310213843_CreateInitial")]
+    partial class CreateInitial
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
