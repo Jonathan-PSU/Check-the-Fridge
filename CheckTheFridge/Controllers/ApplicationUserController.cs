@@ -61,7 +61,7 @@ namespace CheckTheFridge.Controllers
         {
             if (_context.ApplicationUsers.Any(u => u.Username == Username))
             {
-                return BadRequest("Username Taken");
+                return BadRequest("Username Already Taken");
             }
 
             CreatePasswordHash(Password,
@@ -88,12 +88,12 @@ namespace CheckTheFridge.Controllers
             var user = await _context.ApplicationUsers.FirstOrDefaultAsync(u => u.Username == Username);
             if (user == null)
             {
-                return BadRequest("NOpe");
+                return BadRequest("Username Does Not Exist");
             }
 
             if (!VerifyPasswordHash(Password, user.PasswordHash, user.PasswordSalt))
             {
-                return BadRequest("Password wrong");
+                return BadRequest("Password Is Incorrect");
             }
 
             return Ok(user.Id);
@@ -109,7 +109,7 @@ namespace CheckTheFridge.Controllers
 
             if (user == null)
             {
-                return BadRequest("Doesnt Exist");
+                return BadRequest("Username Does Not Exist");
             }
 
             _context.ApplicationUsers.Remove(user);
@@ -142,46 +142,5 @@ namespace CheckTheFridge.Controllers
                 return computedHash.SequenceEqual(passwordHash);
             }
         }
-        /* FORMERLY USING TEXT DATABASE
-         * 
-         * 
-        [HttpGet("get")]
-
-        
-        public async IAsyncEnumerable<ApplicationUser> GetUser()
-        {
-            var users = _context.ApplicationUsers.AsAsyncEnumerable();
-            await foreach (var u in users)
-                yield return u;
-        }
-        [HttpGet]
-        public ApplicationUser GetUser(string id)
-        {
-            DatabaseInterface db = new DatabaseInterface();
-            var user = new ApplicationUser();
-            user.Username = db.GetById(id, "username");
-            user.FirstName = db.GetById(id, "firstname");
-            user.LastName = db.GetById(id, "lastname");
-            user.Password = db.GetById(id, "password");
-            return user;
-        }
-
-        [HttpGet("PasswordValidation")]
-        public int PasswordValidation(string username, string password)
-        {
-            DatabaseInterface db = new DatabaseInterface();
-
-            return db.PasswordValidation(username, password);
-        }
-
-        [HttpPost("CreateUser")]
-        public int CreateUser(string firstname, string lastname, string username, string password)
-        {
-            DatabaseInterface db = new DatabaseInterface();
-
-            return db.CreateUser(firstname, lastname, username, password);
-        }
-        */
-
     }
 }
