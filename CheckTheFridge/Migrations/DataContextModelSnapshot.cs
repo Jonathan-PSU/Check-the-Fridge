@@ -52,12 +52,21 @@ namespace CheckTheFridge.Migrations
 
             modelBuilder.Entity("CheckTheFridge.Models.Ingredient", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<int>("AppUserId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("MealDbId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -68,7 +77,25 @@ namespace CheckTheFridge.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("AppUserId");
+
                     b.ToTable("Ingredients");
+                });
+
+            modelBuilder.Entity("CheckTheFridge.Models.Ingredient", b =>
+                {
+                    b.HasOne("CheckTheFridge.Models.ApplicationUser", "AppUser")
+                        .WithMany("FridgeIngredients")
+                        .HasForeignKey("AppUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("AppUser");
+                });
+
+            modelBuilder.Entity("CheckTheFridge.Models.ApplicationUser", b =>
+                {
+                    b.Navigation("FridgeIngredients");
                 });
 #pragma warning restore 612, 618
         }
