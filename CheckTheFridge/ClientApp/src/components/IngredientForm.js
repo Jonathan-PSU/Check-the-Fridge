@@ -1,8 +1,9 @@
-import React, { useState, onSubmit, Component } from 'react';
+import React, { useState, onSubmit, Component, useEffect } from 'react';
 import { Button, Form, FormGroup, Label, Input, Container, Row, Col } from 'reactstrap';
 import { v4 as uuidv4 } from 'uuid';
 import IngredientList from './IngredientList';
 import Select from 'react-select';
+import AsyncSelect from 'react-select/async';
 
 const AddIngredient = ({ onSave }) => {
     const [name, setName] = useState('');
@@ -10,20 +11,20 @@ const AddIngredient = ({ onSave }) => {
     const [quantity, setQuantity] = useState(1);
     const [id, setid] = useState(0);
 
-    //const [ingredients2, setIngredients2] = useState([]);
+    const [ingVal, setIngVal] = useState([])
 
-
-   /* const searchIngredient = () => {
-        fetch(`https://www.themealdb.com/api/json/v1/1/list.php?i=list`).then(res => res.json()).then(data => { setIngredients(data.meals); })
-    }*/
-    const ingredients2 = [
-        { label: 'Shark', value: 'Shark' },
-        { label: 'Dolphin', value: 'Dolphin' },
-        { label: 'Whale', value: 'Whale' },
-        { label: 'Octopus', value: 'Octopus' },
-        { label: 'Crab', value: 'Crab' },
-        { label: 'Lobster', value: 'Lobster' },
-    ];
+    
+    useEffect(() => {
+        fetch(`https://www.themealdb.com/api/json/v1/1/list.php?i=list`).then(res => res.json())
+            .then(data => {
+                const temp = [];
+                data.meals.forEach((ing) => {
+                    temp.push({ label: `${ing.strIngredient}`, value: `${ing.strIngredient}` });
+                });
+                setIngVal(temp)
+                console.log(temp)
+            })
+    }, []);
 
 
     const onSubmit = (e) => {
@@ -51,8 +52,8 @@ const AddIngredient = ({ onSave }) => {
         <Form onSubmit={onSubmit}>
             <FormGroup>
                 <Label for="ingredient">Ingredient</Label>
-                <Select options={ingredients2}/>
-            </FormGroup>
+                <Select options={ingVal} onChange={(e) => setName(e.target.value)} />
+                <Input id="ingredient" type="text" placeholder="add ingredient name" value={name} onChange={(e) => setName(e.target.value)} />            </FormGroup>
             <FormGroup>
                 <Label for="description">Description</Label>
                 <Input id="description" type="text" placeholder="add ingredient description" value={description} onChange={(e) => setDescription(e.target.value)} />
