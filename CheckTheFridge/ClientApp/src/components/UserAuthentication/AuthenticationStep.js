@@ -1,4 +1,4 @@
-﻿import React, { useState } from "react";
+﻿import React, { useState, useEffect} from "react";
 import App from "../../App";
 import LoginPage from "./LoginPage";
 
@@ -8,7 +8,19 @@ import LoginPage from "./LoginPage";
  * allow user to view webpage contents */
 
 export default function AuthorizeUser() {
-  const [token, setToken] = useState();
+    const [token, setToken] = useState(localStorage.getItem('items') || '');
+
+    useEffect(() => {
+        console.log(localStorage.getItem('items'));
+
+        const items = JSON.parse(localStorage.getItem('items'));
+        if (items) {
+            setToken(items);
+        }
+        else {
+            localStorage.setItem('items', JSON.stringify(token));
+        }
+    }, [token]);
 
   if (!token) {
     return <LoginPage userToken={setToken} />;
