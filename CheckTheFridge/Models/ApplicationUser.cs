@@ -10,7 +10,7 @@ namespace CheckTheFridge.Models
         public string FirstName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
         public string Username { get; set; } = string.Empty;
-        public string Password { get; set; } = string.Empty;
+        //public string Password { get; set; } = string.Empty;
 
         public ICollection<Ingredient> ?FridgeIngredients { get; set;} 
 

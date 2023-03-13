@@ -69,7 +69,7 @@ namespace CheckTheFridge.Controllers
                 FirstName= FirstName,
                 LastName= LastName,
                 Username= Username,
-                Password= Password
+                //Password= Password
             };
 
             _context.ApplicationUsers.Add(user);
@@ -85,12 +85,12 @@ namespace CheckTheFridge.Controllers
             {
                 return BadRequest("NOpe");
             }
-
+            /*
             if (user.Password != Password)
             {
                 return BadRequest("Password wrong");
             }
-         
+         */
             return Ok(user.Id);
         }
 

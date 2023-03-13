@@ -44,10 +44,12 @@ export function AddIngredient() {
     async function addIngredient(ingredient) {
 
         console.log("Ingredient.form data: ", ingredient.name, ingredient.description, ingredient.id, ingredient.quantity, loggedUser.userID)
+        console.log(localStorage.getItem('items'));
+
         //const id = uuidv4();
         //ingredient.id = id;
-        let ingredientsList = await fetchAPIIngredients();
-        console.log("IngredientsList: ", ingredientsList);
+        //let ingredientsList = await fetchAPIIngredients();
+        //console.log("IngredientsList: ", ingredientsList);
 
 
         await fetch('Ingredient/Add/' + ingredient.name + '/' + ingredient.description + '/' + ingredient.quantity + '/' + ingredient.id + '/' + loggedUser.userID, { method: 'POST' })

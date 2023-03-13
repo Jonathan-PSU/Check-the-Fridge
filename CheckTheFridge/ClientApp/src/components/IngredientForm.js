@@ -15,7 +15,11 @@ const AddIngredient = ({ onSave }) => {
 
     const handleChange = (selectedOption) => {
         setName(selectedOption.label);
+        setDescription(selectedOption.description);
+        setid(selectedOption.id);
         console.log(`Option selected:`, selectedOption);
+        console.log(localStorage.getItem('items'));
+
     };
 
     
@@ -24,7 +28,7 @@ const AddIngredient = ({ onSave }) => {
             .then(data => {
                 const temp = [];
                 data.meals.forEach((ing) => {
-                    temp.push({ label: `${ing.strIngredient}`, value: `${ing.strIngredient}` });
+                    temp.push({ label: `${ing.strIngredient}`, value: `${ing.strIngredient}`, id: `${ing.idIngredient}`, description: `${ing.strDescription}` });
                 });
                 setIngVal(temp)
                 console.log(temp)
@@ -46,7 +50,7 @@ const AddIngredient = ({ onSave }) => {
         setName('');
         setDescription('');
         setQuantity(1);
-        //setid('');
+        setid('');
     }
 
     const updateQuantity = (val) => {
