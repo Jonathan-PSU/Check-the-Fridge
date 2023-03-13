@@ -23,12 +23,32 @@ export function AddIngredient() {
             })
     }, [])
 
+    async function fetchAPIIngredients() {
+        await fetch(`https://www.themealdb.com/api/json/v1/1/list.php?i=list`)
+            .then((response) => response.json())
+            .then(data => {
+                try {
+                    console.log("Response data from fetchAPI ", data)
+                    return data
+                }
+                catch (err) {console.log(err) }
+            });
+    }
+
+    function doesIngredientExist(ingredient, ingredientList) {
+        for (const element in ingredientList) {
+
+        }
+    }
 
     async function addIngredient(ingredient) {
 
         console.log("Ingredient.form data: ", ingredient.name, ingredient.description, ingredient.id, ingredient.quantity, loggedUser.userID)
         //const id = uuidv4();
         //ingredient.id = id;
+        let ingredientsList = await fetchAPIIngredients();
+        console.log("IngredientsList: ", ingredientsList);
+
 
         await fetch('Ingredient/Add/' + ingredient.name + '/' + ingredient.description + '/' + ingredient.quantity + '/' + ingredient.id + '/' + loggedUser.userID, { method: 'POST' })
             .then((response) => {
