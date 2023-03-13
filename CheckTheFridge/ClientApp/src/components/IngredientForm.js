@@ -13,6 +13,11 @@ const AddIngredient = ({ onSave }) => {
 
     const [ingVal, setIngVal] = useState([])
 
+    const handleChange = (selectedOption) => {
+        setName(selectedOption.label);
+        console.log(`Option selected:`, selectedOption);
+    };
+
     
     useEffect(() => {
         fetch(`https://www.themealdb.com/api/json/v1/1/list.php?i=list`).then(res => res.json())
@@ -52,7 +57,7 @@ const AddIngredient = ({ onSave }) => {
         <Form onSubmit={onSubmit}>
             <FormGroup>
                 <Label for="ingredient">Ingredient</Label>
-                <Select options={ingVal} onChange={(e) => setName(e.target.value)} />
+                <Select options={ingVal} onChange={handleChange}/>
                 <Input id="ingredient" type="text" placeholder="add ingredient name" value={name} onChange={(e) => setName(e.target.value)} />            </FormGroup>
             <FormGroup>
                 <Label for="description">Description</Label>
