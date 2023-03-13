@@ -1,13 +1,35 @@
-import React, { useState, onSubmit, Component } from 'react';
+import React, { useState, onSubmit, Component, useEffect } from 'react';
 import { Button, Form, FormGroup, Label, Input, Container, Row, Col } from 'reactstrap';
 import { v4 as uuidv4 } from 'uuid';
 import IngredientList from './IngredientList';
+import Select from 'react-select';
+import AsyncSelect from 'react-select/async';
 
 const AddIngredient = ({ onSave }) => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [quantity, setQuantity] = useState(1);
     const [id, setid] = useState(0);
+
+    const [ingVal, setIngVal] = useState([])
+
+    const handleChange = (selectedOption) => {
+        setName(selectedOption.label);
+        console.log(`Option selected:`, selectedOption);
+    };
+
+    
+    useEffect(() => {
+        fetch(`https://www.themealdb.com/api/json/v1/1/list.php?i=list`).then(res => res.json())
+            .then(data => {
+                const temp = [];
+                data.meals.forEach((ing) => {
+                    temp.push({ label: `${ing.strIngredient}`, value: `${ing.strIngredient}` });
+                });
+                setIngVal(temp)
+                console.log(temp)
+            })
+    }, []);
 
 
     const onSubmit = (e) => {
@@ -35,8 +57,8 @@ const AddIngredient = ({ onSave }) => {
         <Form onSubmit={onSubmit}>
             <FormGroup>
                 <Label for="ingredient">Ingredient</Label>
-                <Input id="ingredient" type="text" placeholder="add ingredient name" value={name} onChange={(e) => setName(e.target.value)} />
-            </FormGroup>
+                <Select options={ingVal} onChange={handleChange}/>
+                <Input id="ingredient" type="text" placeholder="add ingredient name" value={name} onChange={(e) => setName(e.target.value)} />            </FormGroup>
             <FormGroup>
                 <Label for="description">Description</Label>
                 <Input id="description" type="text" placeholder="add ingredient description" value={description} onChange={(e) => setDescription(e.target.value)} />
