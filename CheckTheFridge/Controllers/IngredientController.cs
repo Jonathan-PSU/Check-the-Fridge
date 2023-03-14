@@ -39,7 +39,14 @@ namespace CheckTheFridge.Controllers
           
             return Ok(ingredient);
         }
-
+        /*
+        [HttpGet("GetAPIIngredients")]
+        public async Task<ActionResult<List<Ingredient>>> GetAPIIngredients()
+        {
+            var ingredientList = 
+            return Ok(await _context.Ingredients.ToListAsync());
+        }
+        */
         //
         //POSTS
         //

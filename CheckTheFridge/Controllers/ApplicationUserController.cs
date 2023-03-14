@@ -12,7 +12,7 @@ namespace CheckTheFridge.Controllers
     public class ApplicationUserController : ControllerBase
     {
         private readonly DataContext _context;
-        public ApplicationUserController(DataContext context) 
+        public ApplicationUserController(DataContext context)
         {
             _context = context;
         }
@@ -22,7 +22,7 @@ namespace CheckTheFridge.Controllers
         [HttpGet("GetUsers")]
         public async Task<ActionResult<List<ApplicationUser>>> GetUsers()
         {
-             return Ok(await _context.ApplicationUsers.ToListAsync());
+            return Ok(await _context.ApplicationUsers.ToListAsync());
         }
 
         [HttpGet("{Id}/GetUser")]
@@ -34,7 +34,7 @@ namespace CheckTheFridge.Controllers
             {
                 return BadRequest("User Does Not Exist");
             }
-          
+
             return Ok(user);
         }
 
@@ -43,7 +43,7 @@ namespace CheckTheFridge.Controllers
         {
             var users = await _context.ApplicationUsers.Include("FridgeIngredients").ToListAsync();
             var user = users.Find(x => x.Id == Id);
-            
+
 
             if (user == null)
             {
@@ -70,11 +70,11 @@ namespace CheckTheFridge.Controllers
 
             var user = new ApplicationUser
             {
-                FirstName= FirstName,
-                LastName= LastName,
-                Username= Username,
-                PasswordHash= passwordHash,
-                PasswordSalt= passwordSalt
+                FirstName = FirstName,
+                LastName = LastName,
+                Username = Username,
+                PasswordHash = passwordHash,
+                PasswordSalt = passwordSalt
             };
 
             _context.ApplicationUsers.Add(user);

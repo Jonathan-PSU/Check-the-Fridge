@@ -3,6 +3,7 @@ import IngredientForm from './IngredientForm';
 import { v4 as uuidv4 } from 'uuid';
 import IngredientList from './IngredientList';
 import { Container, Row, Col } from 'reactstrap';
+import { loggedUser } from './UserAuthentication/LoginPage'
 
 
 export function AddIngredient() {
@@ -10,7 +11,6 @@ export function AddIngredient() {
     const [ingredientList, setIngredientList] = useState([]);
     const [name, setName] = useState();
     const [desc, setDesc] = useState();
-
 
     useEffect(() => {
         fetch('Ingredient/GetIngredients')
@@ -23,14 +23,36 @@ export function AddIngredient() {
             })
     }, [])
 
+    async function fetchAPIIngredients() {
+        await fetch(`https://www.themealdb.com/api/json/v1/1/list.php?i=list`)
+            .then((response) => response.json())
+            .then(data => {
+                try {
+                    console.log("Response data from fetchAPI ", data)
+                    return data
+                }
+                catch (err) {console.log(err) }
+            });
+    }
+
+    function doesIngredientExist(ingredient, ingredientList) {
+        for (const element in ingredientList) {
+
+        }
+    }
 
     async function addIngredient(ingredient) {
 
-        console.log("Ingredient.form data: ", ingredient.name, ingredient.description, ingredient.id, ingredient.quantity)
+        console.log("Ingredient.form data: ", ingredient.name, ingredient.description, ingredient.id, ingredient.quantity, loggedUser.userID)
+        console.log(localStorage.getItem('items'));
+
         //const id = uuidv4();
         //ingredient.id = id;
+        //let ingredientsList = await fetchAPIIngredients();
+        //console.log("IngredientsList: ", ingredientsList);
 
-        await fetch('Ingredient/Add/' + ingredient.name + '/' + ingredient.description + '/' + ingredient.id + '/' + ingredient.quantity, { method: 'POST' })
+
+        await fetch('Ingredient/Add/' + ingredient.name + '/' + ingredient.description + '/' + ingredient.quantity + '/' + ingredient.id + '/' + loggedUser.userID, { method: 'POST' })
             .then((response) => {
                 if (response.ok) {
                     console.log('Ingredient created')
