@@ -10,13 +10,14 @@ const AddIngredient = ({ onSave }) => {
     const [description, setDescription] = useState('');
     const [quantity, setQuantity] = useState(1);
     const [id, setid] = useState(0);
-
+    const [selectedName, setSelectedName] = useState(null);
     const [ingVal, setIngVal] = useState([])
 
     const handleChange = (selectedOption) => {
         setName(selectedOption.label);
         setDescription(selectedOption.description);
         setid(selectedOption.id);
+        setSelectedName(selectedOption);
         console.log(`Option selected:`, selectedOption);
         console.log(localStorage.getItem('items'));
 
@@ -31,7 +32,6 @@ const AddIngredient = ({ onSave }) => {
                     temp.push({ label: `${ing.strIngredient}`, value: `${ing.strIngredient}`, id: `${ing.idIngredient}`, description: `${ing.strDescription}` });
                 });
                 setIngVal(temp)
-                console.log(temp)
             })
     }, []);
 
@@ -39,18 +39,20 @@ const AddIngredient = ({ onSave }) => {
     const onSubmit = (e) => {
         e.preventDefault();
         if (!name && !description) {
-            console.log('Ingredient and description not added)');        
+            console.log('Ingredient and description not added');        
         } else if (!name && description) {
-            console.log('Ingredient not added)');
+            console.log('Ingredient not added');
         } else if (name && !description) {
-            console.log('Description not added)');
+            console.log('Description not added');
         } else {
             onSave({ name, description, quantity, id });
         }
         setName('');
+        setSelectedName(null);
         setDescription('');
         setQuantity(1);
         setid('');
+
     }
 
     const updateQuantity = (val) => {
@@ -61,8 +63,8 @@ const AddIngredient = ({ onSave }) => {
         <Form onSubmit={onSubmit}>
             <FormGroup>
                 <Label for="ingredient">Ingredient</Label>
-                <Select options={ingVal} onChange={handleChange}/>
-                <Input id="ingredient" type="text" placeholder="add ingredient name" value={name} onChange={(e) => setName(e.target.value)} />            </FormGroup>
+                <Select value={selectedName} options={ingVal} onChange={handleChange} />
+            </FormGroup>
             <FormGroup>
                 <Label for="description">Description</Label>
                 <Input id="description" type="text" placeholder="add ingredient description" value={description} onChange={(e) => setDescription(e.target.value)} />
