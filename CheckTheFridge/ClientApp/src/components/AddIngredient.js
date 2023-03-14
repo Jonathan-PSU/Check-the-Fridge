@@ -22,7 +22,13 @@ export function AddIngredient() {
                 return results.json();
             })
             .then(data => {
-                setIngredientList(data);
+                const userIngredients = []
+                data.forEach((ing) => {
+                    if (ing.appUserId == localStorage.getItem('items')) {
+                        userIngredients.push(ing);
+                    }
+                })
+                setIngredientList(userIngredients);
             })
 
     }
@@ -57,10 +63,6 @@ export function AddIngredient() {
                     getIngredientList();
                 }
                 else {
-                    console.log("response: " + response);
-                    console.log("response status: " + response.statusText);
-                    console.log("response body: " + response.body);
-
                     throw new Error('Ingredient not created.', response.json());
 
                 }
