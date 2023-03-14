@@ -13,15 +13,25 @@ export function AddIngredient() {
     const [desc, setDesc] = useState();
 
     useEffect(() => {
+        getIngredientList();
+    }, [])
+
+    async function getIngredientList() {
         fetch('Ingredient/GetIngredients')
             .then((results) => {
-                console.log(results);
                 return results.json();
             })
             .then(data => {
-                setIngredientList(data);
+                const userIngredients = []
+                data.forEach((ing) => {
+                    if (ing.appUserId == localStorage.getItem('items')) {
+                        userIngredients.push(ing);
+                    }
+                })
+                setIngredientList(userIngredients);
             })
-    }, [])
+
+    }
 
     async function fetchAPIIngredients() {
         await fetch(`https://www.themealdb.com/api/json/v1/1/list.php?i=list`)
@@ -43,25 +53,16 @@ export function AddIngredient() {
 
     async function addIngredient(ingredient) {
 
-        console.log("Ingredient.form data: ", ingredient.name, ingredient.description, ingredient.id, ingredient.quantity, loggedUser.userID)
-        console.log(localStorage.getItem('items'));
+        console.log("Ingredient.form data: ", ingredient.name, ingredient.description, ingredient.id, ingredient.quantity, localStorage.getItem('items'))
 
-        //const id = uuidv4();
-        //ingredient.id = id;
-        //let ingredientsList = await fetchAPIIngredients();
-        //console.log("IngredientsList: ", ingredientsList);
-
-
-        await fetch('Ingredient/Add/' + ingredient.name + '/' + ingredient.description + '/' + ingredient.quantity + '/' + ingredient.id + '/' + loggedUser.userID, { method: 'POST' })
+        await fetch('Ingredient/Add/' + ingredient.name + '/' + ingredient.description + '/' + ingredient.quantity + '/' + ingredient.id + '/' + localStorage.getItem('items'), { method: 'POST' })
             .then((response) => {
                 if (response.ok) {
                     console.log('Ingredient created')
                     console.log(response);
+                    getIngredientList();
                 }
                 else {
-                    console.log(response.statusText);
-                    console.log(response.body);
-
                     throw new Error('Ingredient not created.', response.json());
 
                 }
@@ -70,6 +71,7 @@ export function AddIngredient() {
             .catch((error) => {
                 console.log(error)
             })
+
     }
     
     // Delete Ingredient
